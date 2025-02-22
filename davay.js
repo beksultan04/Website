@@ -1,64 +1,38 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const examLevelSelect = document.getElementById("exam-level");
+    const submitButton = document.getElementById("submit");
+    const linksContainer = document.getElementById("university-links");
 
-    function toggleContainer(checkboxId, containerId) {
-        document.getElementById(checkboxId).addEventListener("change", function () {
-            const container = document.getElementById(containerId);
-            container.classList.toggle("hidden", !this.checked);
-        });
-    }
+    // Добавляем обработчик на кнопку submit
+    submitButton.addEventListener("click", function (event) {
+        event.preventDefault(); // Предотвращаем стандартное поведение формы
 
-    function updateSliderValue(sliderId, valueId) {
-        const slider = document.getElementById(sliderId);
-        const valueDisplay = document.getElementById(valueId);
-        valueDisplay.textContent = slider.value; // Устанавливаем начальное значение
-
-        slider.addEventListener("input", function () {
-            valueDisplay.textContent = this.value; // Обновляем при движении
-        });
-    }
-
-    toggleContainer("gpaCheck", "gpa-container");
-    toggleContainer("ieltsCheck", "ielts-container");
-    toggleContainer("toeflCheck", "toefl-container");
-
-    // Обновляем значения слайдеров
-    updateSliderValue("gpa", "gpa-value");
-    updateSliderValue("ielts", "ielts-value");
-    updateSliderValue("toefl", "toefl-value");
-    
-    if (examLevelSelect) {
-        new Choices(examLevelSelect, {
-            removeItemButton: true,
-            searchEnabled: true,
-            placeholder: true,
-            placeholderValue: "Search",
-            searchPlaceholderValue: "Search",
-            noResultsText: "Ничего не найдено"
-        });
-    }
-
-    const checkboxes = [
-        { id: "gpaCheck", container: "gpa-container" },
-        { id: "ieltsCheck", container: "ielts-container" },
-        { id: "toeflCheck", container: "toefl-container" }
-    ];
-
-    checkboxes.forEach(({ id, container }) => {
-        const checkbox = document.getElementById(id);
-        const containerElement = document.getElementById(container);
-
-        if (checkbox && containerElement) {
-            checkbox.addEventListener("change", function () {
-                containerElement.style.display = this.checked ? "block" : "none";
-            });
-        }
+        // Показываем уже существующие ссылки из HTML
+        linksContainer.classList.add("show");
     });
-});
 
-function applyFilter(id) {
-    const inputElement = document.getElementById(id);
-    if (inputElement) {
-        alert(`Фильтр ${id.toUpperCase()} применен: ${inputElement.value}`);
+    // Улучшаем стили для поля поиска
+    const searchBox = document.getElementById("search");
+    if (searchBox) {
+        searchBox.style.border = "2px solid #FF5722";
+        searchBox.style.borderRadius = "5px";
+        searchBox.style.padding = "10px";
+        searchBox.style.fontSize = "16px";
     }
-}
+
+    // Фильтрация значений выпадающих списков
+    function filterOptions() {
+        let searchInput = searchBox.value.toLowerCase();
+        let selects = document.querySelectorAll("select");
+
+        selects.forEach(select => {
+            for (let option of select.options) {
+                let text = option.text.toLowerCase();
+                if (text.includes(searchInput) || option.value === "") {
+                    option.style.display = "";
+                } else {
+                    option.style.display = "none";
+                }
+            }
+        });
+    }
+});

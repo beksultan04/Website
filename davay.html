@@ -13,6 +13,7 @@
     <div class="container">
         <h2>Показали (Фронтенд)</h2>
         <p>Отфильтровали по нужным полям</p>
+        <input type="text" id="search" class="search-box" placeholder="Search...">
 
         <!-- Основные новые dropdown списки -->
         <label for="field-study">Field of Study</label>
@@ -26,6 +27,9 @@
         <label for="subject">Subject</label>
         <select id="subject">
             <option>Please select</option>
+            <option>AI</option>
+            <option>Data Science</option>
+            <option>Cybersecurity</option>
         </select>
 
         <label for="language-level">Language Level English</label>
@@ -57,6 +61,7 @@
         <select id="beginning">
             <option>Please select</option>
         </select>
+        <button id="search-button">Search</button>
 
         <label for="exam-level">Level</label>
         <select id="exam-level" multiple>
@@ -133,9 +138,14 @@
         
         <div style="text-align: center; margin-top: 20px;">
         <!-- Кнопка Submit -->
-<button onclick="window.location.href='https://www2.daad.de/deutschland/studienangebote/international-programmes/en/result/?q=&degree%5B%5D=&lang%5B%5D=&fos=&cert=&admReq=&langExamPC=&scholarshipLC=&langExamLC=&scholarshipSC=&langExamSC=&langDeAvailable=&langEnAvailable=&lvlEn%5B%5D=&modStd%5B%5D=&cit%5B%5D=&tyi%5B%5D=&ins%5B%5D=&fee=&bgn%5B%5D=&dat%5B%5D=&prep_subj%5B%5D=&prep_degree%5B%5D=&sort=4&dur=&subjects%5B%5D=&limit=25&offset=&display=list';">
-    Submit
-</button>
+        <button id="submit">Submit</button>
+        <div id="university-links" class="hidden">
+            <a href="https://www2.daad.de/deutschland/studienangebote/international-programmes/en/detail/5402/" target="_blank" class="university-link">Martin Luther University</a>
+            <a href="https://www2.daad.de/deutschland/studienangebote/international-programmes/en/detail/9019/" target="_blank" class="university-link">Osnabrück University of Applied Sciences</a>
+            <a href="https://www2.daad.de/deutschland/studienangebote/international-programmes/en/detail/5573/" target="_blank" class="university-link">SRH Universities</a>
+            <a href="https://www2.daad.de/deutschland/studienangebote/international-programmes/en/detail/4100/" target="_blank" class="university-link">University of Cologne</a>
+            <a href="https://www2.daad.de/deutschland/studienangebote/international-programmes/en/detail/9744/" target="_blank" class="university-link">University of Passau</a>
+        </div>
 
     </div> <!-- Закрытие контейнера после кнопки -->
 </div>

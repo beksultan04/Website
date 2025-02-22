@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фильтр</title>
+    <link rel="stylesheet" href="davay.css">
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Показали (Фронтенд)</h2>
+        <p>Отфильтровали по нужным полям</p>
+
+        <!-- Основные новые dropdown списки -->
+        <label for="field-study">Field of Study</label>
+        <select id="field-study">
+            <option>Please select</option>
+            <option>Agriculture, Forestry and Nutrition</option>
+            <option>Engineering</option>
+            <option>Business & Management</option>
+        </select>
+
+        <label for="subject">Subject</label>
+        <select id="subject">
+            <option>Please select</option>
+        </select>
+
+        <label for="language-level">Language Level English</label>
+        <select id="language-level" disabled>
+            <option>No options available</option>
+        </select>
+
+        <label for="mode-study">Mode of Study</label>
+        <select id="mode-study">
+            <option>Please select</option>
+        </select>
+
+        <label for="city">City</label>
+        <select id="city">
+            <option>Please select</option>
+        </select>
+
+        <label for="institution">Institution</label>
+        <select id="institution">
+            <option>Please select</option>
+        </select>
+
+        <label for="tuition-fees">Tuition Fees</label>
+        <select id="tuition-fees">
+            <option>Please select</option>
+        </select>
+
+        <label for="beginning">Beginning</label>
+        <select id="beginning">
+            <option>Please select</option>
+        </select>
+
+        <label for="exam-level">Level</label>
+        <select id="exam-level" multiple>
+            <option value="" disabled hidden>Search</option>
+            <!-- TOEFL -->
+            <option value="toefl 118">TOEFL 118</option>
+            <option value="toefl 115">TOEFL 115</option>
+            <option value="toefl 110">TOEFL 110</option>
+            <option value="toefl 102">TOEFL 102</option>
+            <option value="toefl 94">TOEFL 94</option>
+            <option value="toefl 79">TOEFL 79</option>
+            <option value="toefl 60">TOEFL 60</option>
+            <option value="toefl 46">TOEFL 46</option>
+            <option value="toefl 35">TOEFL 35</option>
+            <option value="toefl 32">TOEFL 32</option>
+            <option value="toefl 0-31">TOEFL 0-31</option>
+
+            <!-- IELTS -->
+            <option value="ielts 9">IELTS 9</option>
+            <option value="ielts 8.5">IELTS 8.5</option>
+            <option value="ielts 8">IELTS 8</option>
+            <option value="ielts 7.5">IELTS 7.5</option>
+            <option value="ielts 7">IELTS 7</option>
+            <option value="ielts 6.5">IELTS 6.5</option>
+            <option value="ielts 6">IELTS 6</option>
+            <option value="ielts 5.5">IELTS 5.5</option>
+            <option value="ielts 5">IELTS 5</option>
+            <option value="ielts 4.5">IELTS 4.5</option>
+            <option value="ielts 0-4">IELTS 0-4</option>
+
+            <!-- B2 -->
+            <option value="b2">B2</option>
+        </select>
+
+        <div>
+            <label for="gpaCheck">GPA out of 100</label>
+            <input type="checkbox" id="gpaCheck">  
+            <div id="gpa-container" class="hidden">
+                <input type="range" id="gpa" min="0" max="100">
+                <p>Value: <span id="gpa-value">0</span></p>
+                <button onclick="applyFilter('gpa')">OK</button>
+            </div>
+        </div>
+
+        <div>
+            <label for="ieltsCheck">IELTS (0-9)</label>
+            <input type="checkbox" id="ieltsCheck"> 
+            <div id="ielts-container" class="hidden">
+                <input type="range" id="ielts" min="0" max="9" step="0.5">
+                <p>Value: <span id="ielts-value">0</span></p>
+                <button onclick="applyFilter('ielts')">OK</button>
+            </div>
+        </div>
+
+        <div>
+            <label for="toeflCheck">TOEFL (0-120)</label>
+            <input type="checkbox" id="toeflCheck"> 
+            <div id="toefl-container" class="hidden">
+                <input type="range" id="toefl" min="0" max="120">
+                <p>Value: <span id="toefl-value">0</span></p>
+                <button onclick="applyFilter('toefl')">OK</button>
+            </div>
+        </div>
+
+        <h3>Exams</h3>
+        <label for="gmat">GMAT</label> <input type="checkbox" id="gmat">
+        <label for="gre">GRE</label> <input type="checkbox" id="gre"> 
+
+        <h3>Подача</h3>
+        <select>
+            <option>Прямая подача</option>
+            <option>Через агента</option>
+        </select>
+        
+        <div style="text-align: center; margin-top: 20px;">
+        <!-- Кнопка Submit -->
+<button onclick="window.location.href='https://www2.daad.de/deutschland/studienangebote/international-programmes/en/result/?q=&degree%5B%5D=&lang%5B%5D=&fos=&cert=&admReq=&langExamPC=&scholarshipLC=&langExamLC=&scholarshipSC=&langExamSC=&langDeAvailable=&langEnAvailable=&lvlEn%5B%5D=&modStd%5B%5D=&cit%5B%5D=&tyi%5B%5D=&ins%5B%5D=&fee=&bgn%5B%5D=&dat%5B%5D=&prep_subj%5B%5D=&prep_degree%5B%5D=&sort=4&dur=&subjects%5B%5D=&limit=25&offset=&display=list';">
+    Submit
+</button>
+
+    </div> <!-- Закрытие контейнера после кнопки -->
+</div>
+
+
+    <script src="davay.js"></script>
+</body>
+</html>
